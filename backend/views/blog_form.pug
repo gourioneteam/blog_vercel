@@ -1,0 +1,17 @@
+doctype html
+html
+  head
+    title #{blog._id ? 'Edit Blog' : 'New Blog'}
+  body
+    form(action=blog._id ? `/blogs/${blog._id}` : '/blogs' method="post")
+      if blog._id
+        input(type="hidden" name="_method" value="put")
+      label(for="title") Title:
+      input(type="text" name="title" value=blog.title required)
+      br
+      label(for="content") Content:
+      textarea(name="content" required)= blog.content
+      br
+      button(type="submit") #{blog._id ? 'Update' : 'Create'}
+    if error
+      p(style="color:red") #{error}

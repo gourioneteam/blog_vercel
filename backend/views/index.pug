@@ -1,0 +1,16 @@
+doctype html
+html
+  head
+    title Blog App
+  body
+    if user
+      p Welcome, #{user.id}!
+      a(href="/users/logout") Logout
+      a(href="/blogs") View Blogs
+    else
+      a(href="/users/register") Register
+      a(href="/users/login") Login
+    if success
+      p(style="color:green") #{success}
+    if error
+      p(style="color:red") #{error}

@@ -1,0 +1,31 @@
+doctype html
+html
+  head
+    title Blogs
+  body
+    // Navbar or header
+    header
+      if user
+        a(href="/users/logout") Logout
+        br
+      a(href="/blogs/new") Add New Blog
+    
+    // Main content
+    if blogs.length
+      each blog in blogs
+        h2 #{blog.title}
+        p By #{blog.author.username} on #{blog.createdAt.toDateString()}
+        p #{blog.content}
+        if blog.author._id.toString() === user.id
+          a(href=`/blogs/${blog._id}/edit`) Edit
+          br
+          form(action=`/blogs/${blog._id}/delete` method="post" style="display:inline")
+            button(type="submit") Delete
+    else
+      p No blogs found
+
+    // Flash messages
+    if success
+      p(style="color:green") #{success}
+    if error
+      p(style="color:red") #{error}
